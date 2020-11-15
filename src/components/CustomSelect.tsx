@@ -5,7 +5,7 @@ import {
   MenuItem,
   makeStyles,
 } from '@material-ui/core'
-import React, { ChangeEventHandler, useCallback } from 'react'
+import React, { ChangeEventHandler, ReactNode, useCallback } from 'react'
 
 interface CustomSelectProps {
   label: string
@@ -13,6 +13,7 @@ interface CustomSelectProps {
   setValue: (newValue: string) => void
   items: string[]
   values?: string[]
+  allLabel?: ReactNode
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -32,6 +33,7 @@ export function CustomSelect({
   setValue,
   items,
   values,
+  allLabel,
 }: CustomSelectProps) {
   const classes = useStyles()
 
@@ -52,7 +54,7 @@ export function CustomSelect({
         fullWidth
       >
         <Select value={value} onChange={handleChange}>
-          <MenuItem value="ทั้งหมด">ทั้งหมด</MenuItem>
+          <MenuItem value="ทั้งหมด">{allLabel || 'ทั้งหมด'}</MenuItem>
           {items.map((item, idx) => {
             const value = values ? values[idx] : item
             return (

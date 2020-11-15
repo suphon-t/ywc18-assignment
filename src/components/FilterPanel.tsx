@@ -4,6 +4,7 @@ import { useQueryState } from '../utils'
 import { useSearchData } from '../utils/searchData'
 import { CustomSelect } from './CustomSelect'
 import { CustomRadio } from './CustomRadio'
+import { AllPlacesIcon } from './AllPlacesIcon'
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -56,6 +57,12 @@ export function FilterPanel() {
         value={province}
         setValue={setProvince}
         items={provinces}
+        allLabel={
+          <>
+            <AllPlacesIcon />
+            สถานที่ทั้งหมด
+          </>
+        }
       />
       <CustomSelect
         label="ราคา"
