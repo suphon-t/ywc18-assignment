@@ -134,7 +134,9 @@ export function MerchantCard(props: MerchantCardProps) {
       variant="body2"
       color="textSecondary"
     >
-      <label className={classes.recommendedLabel}>เมนูแนะนำ:</label>
+      <label className={classes.recommendedLabel}>
+        {merchant.categoryName === 'ร้านอาหาร' ? 'เมนูแนะนำ' : 'สินค้าแนะนำ'}:
+      </label>
       {merchant.recommendedItems.join(', ')}
     </Typography>
   )
