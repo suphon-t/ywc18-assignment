@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React from 'react'
 import {
   Breadcrumbs,
   makeStyles,
@@ -8,7 +8,7 @@ import {
 import { TopBar } from './TopBar'
 import { darkTheme } from '../utils/theme'
 import { SearchResults } from './SearchResults'
-import { ErrorBoundary } from './ErrorBoundary'
+import { Fallback } from './Fallback'
 
 const useStyles = makeStyles((theme) => ({
   breadcrumbsContainer: {
@@ -23,10 +23,12 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   header: {
-    paddingTop: 8,
+    padding: 24,
+    paddingLeft: 16,
     fontWeight: 600,
   },
   contentContainer: {
+    marginTop: 8,
     padding: theme.spacing(2),
   },
 }))
@@ -45,16 +47,14 @@ export function ShopSearch() {
           </Breadcrumbs>
         </div>
       </ThemeProvider>
-      <ErrorBoundary fallback="Error loading data.">
-        <Suspense fallback="Loading...">
-          <div className={classes.contentContainer}>
-            <Typography variant="h6" className={classes.header}>
-              ผลการค้นหา
-            </Typography>
-            <SearchResults />
-          </div>
-        </Suspense>
-      </ErrorBoundary>
+      <Typography variant="h6" className={classes.header}>
+        ผลการค้นหา
+      </Typography>
+      <div className={classes.contentContainer}>
+        <Fallback>
+          <SearchResults />
+        </Fallback>
+      </div>
     </div>
   )
 }
