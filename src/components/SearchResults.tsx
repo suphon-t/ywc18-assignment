@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
 import { Merchant, QueryOptions, useSearchData } from '../utils/searchData'
+import { ErrorPage } from './ErrorPage'
 import { MerchantCard } from './MerchantCard'
 
 interface SearchResultsProps {
@@ -48,6 +49,15 @@ export function SearchResults({ options }: SearchResultsProps) {
       predicates.every((predicate) => predicate(merchant))
     )
   }, [merchants, categoryMap, options])
+
+  if (filtered.length === 0) {
+    return (
+      <ErrorPage
+        title="ไม่พบสถานที่ที่คุณกำลังหา"
+        description="ร้านค้าที่ท่านค้นหาอาจไม่ได้เข้าร่วมโครงการ คนละครึ่ง"
+      />
+    )
+  }
 
   return (
     <div style={{ flex: 1 }}>
