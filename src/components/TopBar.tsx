@@ -29,6 +29,7 @@ import { FilterPanel } from './FilterPanel'
 import { MdArrowBack } from 'react-icons/md'
 import { lightTheme } from '../utils/theme'
 import { Fallback } from './Fallback'
+import { ProvinceSelect } from './ProvinceSelect'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -61,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
   },
   searchBar: {
     height: 40,
-    padding: '2px 4px',
+    paddingRight: 4,
     display: 'flex',
     alignItems: 'center',
     flex: 1,
@@ -71,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   input: {
-    marginLeft: theme.spacing(1),
+    marginLeft: 10,
     flex: 1,
   },
   iconButton: {
@@ -145,6 +146,11 @@ export function TopBar() {
         className={classes.searchBar}
         onSubmit={handleSubmit}
       >
+        <Hidden smDown>
+          <Fallback>
+            <ProvinceSelect />
+          </Fallback>
+        </Hidden>
         <InputBase
           className={classes.input}
           value={query}
