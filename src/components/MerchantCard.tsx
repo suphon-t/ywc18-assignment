@@ -24,14 +24,17 @@ const useStyles = makeStyles<Theme, MerchantCardProps>((theme) => ({
   },
   media: {
     minHeight: 224,
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('lg')]: {
       width: 240,
     },
+  },
+  content: {
+    flex: 1,
   },
   cardLayout: {
     display: 'flex',
     flexDirection: 'column',
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('lg')]: {
       flexDirection: 'row',
     },
   },
@@ -148,7 +151,7 @@ export function MerchantCard(props: MerchantCardProps) {
     <Card variant="outlined" className={classes.container}>
       <div className={classes.cardLayout}>
         <CardMedia className={classes.media} image={merchant.coverImageId} />
-        <CardContent>
+        <CardContent className={classes.content}>
           {merchantTitle}
           {merchantInfo}
           <Divider className={classes.divider} />

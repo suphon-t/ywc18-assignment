@@ -1,8 +1,12 @@
-import { useCallback, useMemo, useRef } from 'react'
+import { ChangeEventHandler, useCallback, useMemo, useRef } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import queryString from 'query-string'
 
-type StateResult<T> = [T, (newValue: T) => void]
+type StateResult<T> = [
+  T,
+  (newValue: T) => void,
+  ChangeEventHandler<{ value: unknown }>
+]
 
 export function useQueryState(
   key: string,
@@ -36,5 +40,12 @@ export function useQueryState(
     [defaultValue, key, replace]
   )
 
-  return [value, setValue]
+  const handleChange: ChangeEventHandler<HTMLInputElement> = useCallback(
+    (e) => {
+      setValue(e.target.value)
+    },
+    [setValue]
+  )
+
+  return [value, setValue, handleChange]
 }

@@ -1,36 +1,56 @@
 import React, { useMemo } from 'react'
-import { useLocation } from 'react-router-dom'
-import queryString from 'query-string'
-import { useSearchData } from '../utils/searchData'
+import { Merchant, QueryOptions, useSearchData } from '../utils/searchData'
 import { MerchantCard } from './MerchantCard'
 
-interface QueryOptions {
-  searchQuery?: string
+interface SearchResultsProps {
+  options: QueryOptions
 }
 
-export function SearchResults() {
+type MerchantPredicate = (merchant: Merchant) => boolean
+
+export function SearchResults({ options }: SearchResultsProps) {
   const { data } = useSearchData()
-  const { merchants, priceRange } = data!
-  const { search } = useLocation()
+  const { merchants, categoryMap, priceRange } = data!
 
   const filtered = useMemo(() => {
-    const { searchQuery }: QueryOptions = queryString.parse(search)
-    return merchants.filter((merchant) => {
-      let matches = true
+    const {
+      searchQuery,
+      category: categoryName,
+      province,
+      price,
+      subcategory,
+    } = options
+    const category = categoryName && categoryMap[categoryName]
+    const predicates: MerchantPredicate[] = []
 
-      if (
-        searchQuery &&
-        !merchant.shopNameTH.toLowerCase().includes(searchQuery.toLowerCase())
-      ) {
-        matches = false
-      }
+    if (searchQuery) {
+      const searchQueryLowerCase = searchQuery.toLowerCase()
+      predicates.push((merchant) =>
+        merchant.shopNameTH.toLowerCase().includes(searchQueryLowerCase)
+      )
+    }
+    if (category) {
+      predicates.push((merchant) =>
+        category.subcategorySet.has(merchant.subcategoryName)
+      )
+    }
+    if (province) {
+      predicates.push((merchant) => merchant.addressProvinceName === province)
+    }
+    if (price) {
+      predicates.push((merchant) => merchant.priceLevel === parseInt(price))
+    }
+    if (subcategory) {
+      predicates.push((merchant) => merchant.subcategoryName === subcategory)
+    }
 
-      return matches
-    })
-  }, [merchants, search])
+    return merchants.filter((merchant) =>
+      predicates.every((predicate) => predicate(merchant))
+    )
+  }, [merchants, categoryMap, options])
 
   return (
-    <div>
+    <div style={{ flex: 1 }}>
       {filtered.map((merchant) => (
         <MerchantCard
           key={merchant.shopNameTH}

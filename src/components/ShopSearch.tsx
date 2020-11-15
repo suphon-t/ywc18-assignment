@@ -1,14 +1,20 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import {
   Breadcrumbs,
+  Card,
+  CardContent,
   makeStyles,
   ThemeProvider,
   Typography,
 } from '@material-ui/core'
+import { useLocation } from 'react-router-dom'
+import queryString from 'query-string'
 import { TopBar } from './TopBar'
 import { darkTheme } from '../utils/theme'
 import { SearchResults } from './SearchResults'
 import { Fallback } from './Fallback'
+import { FilterPanel } from './FilterPanel'
+import { QueryOptions, useSearchData } from '../utils/searchData'
 
 const useStyles = makeStyles((theme) => ({
   breadcrumbsContainer: {
@@ -30,11 +36,30 @@ const useStyles = makeStyles((theme) => ({
   contentContainer: {
     marginTop: 8,
     padding: theme.spacing(2),
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
+    },
+  },
+  filterContainer: {
+    width: 350,
+    marginRight: 32,
   },
 }))
 
 export function ShopSearch() {
   const classes = useStyles()
+  const { search } = useLocation()
+  const { data: searchData } = useSearchData(false)
+  const priceRange = searchData?.priceRange
+
+  const options: QueryOptions = useMemo(() => queryString.parse(search), [
+    search,
+  ])
+
+  const price =
+    priceRange &&
+    options.price &&
+    ', ราคา ' + priceRange[parseInt(options.price) - 1]
 
   return (
     <div>
@@ -48,11 +73,19 @@ export function ShopSearch() {
         </div>
       </ThemeProvider>
       <Typography variant="h6" className={classes.header}>
-        ผลการค้นหา
+        ผลการค้นหา{options.category && ' ' + options.category}
+        {price} ทั้งหมด
       </Typography>
       <div className={classes.contentContainer}>
         <Fallback>
-          <SearchResults />
+          <div>
+            <Card variant="outlined" className={classes.filterContainer}>
+              <CardContent>
+                <FilterPanel />
+              </CardContent>
+            </Card>
+          </div>
+          <SearchResults options={options} />
         </Fallback>
       </div>
     </div>

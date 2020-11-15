@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import useSWR from 'swr'
 
 export interface Category {
@@ -19,15 +20,56 @@ export interface Merchant {
   addressDistrictName: string
 }
 
+interface CategoryMap {
+  [categoryName: string]: Category & {
+    subcategorySet: Set<string>
+  }
+}
+
 export interface SearchData {
   categories: Category[]
+  categoryMap: CategoryMap
   provinces: string[]
   priceRange: string[]
   merchants: Merchant[]
 }
 
+export interface QueryOptions {
+  searchQuery?: string
+  category?: string
+  province?: string
+  price?: string
+  subcategory?: string
+}
+
 const apiUrl = process.env.REACT_APP_API_URL as string
 
-export function useSearchData() {
-  return useSWR<SearchData>(`${apiUrl}/ywc18.json`, { suspense: true })
+export function useSearchData(suspense: boolean = true) {
+  const { data, ...rest } = useSWR<SearchData>(`${apiUrl}/ywc18.json`, {
+    suspense,
+  })
+  const categoryMap = useMemo(() => {
+    if (!data) return null
+    const categoryMap: CategoryMap = {}
+    data.categories.forEach((category) => {
+      const subcategorySet = new Set<string>()
+      category.subcategories.forEach((subcategory) =>
+        subcategorySet.add(subcategory)
+      )
+      categoryMap[category.name] = { ...category, subcategorySet }
+    })
+    return categoryMap
+  }, [data])
+
+  if (data) {
+    return {
+      data: {
+        ...data,
+        categoryMap: categoryMap!,
+      },
+      ...rest,
+    }
+  } else {
+    return { data, ...rest }
+  }
 }
