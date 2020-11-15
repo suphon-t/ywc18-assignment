@@ -3,6 +3,7 @@ import {
   Breadcrumbs,
   Card,
   CardContent,
+  Hidden,
   makeStyles,
   ThemeProvider,
   Typography,
@@ -78,13 +79,15 @@ export function ShopSearch() {
       </Typography>
       <div className={classes.contentContainer}>
         <Fallback>
-          <div>
-            <Card variant="outlined" className={classes.filterContainer}>
-              <CardContent>
-                <FilterPanel />
-              </CardContent>
-            </Card>
-          </div>
+          <Hidden smDown>
+            <div>
+              <Card variant="outlined" className={classes.filterContainer}>
+                <CardContent>
+                  <FilterPanel />
+                </CardContent>
+              </Card>
+            </div>
+          </Hidden>
           <SearchResults options={options} />
         </Fallback>
       </div>

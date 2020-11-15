@@ -6,12 +6,16 @@ import React, {
   useState,
 } from 'react'
 import {
+  AppBar,
   Divider,
+  Drawer,
+  Hidden,
   IconButton,
   InputBase,
   makeStyles,
   Paper,
   Theme,
+  Typography,
   useMediaQuery,
 } from '@material-ui/core'
 
@@ -20,6 +24,8 @@ import logoMini from '../assets/halfhalf-logo-mini.png'
 import Search from '@material-ui/icons/Search'
 import FilterList from '@material-ui/icons/FilterList'
 import { useQueryState } from '../utils'
+import { FilterPanel } from './FilterPanel'
+import { MdArrowBack } from 'react-icons/md'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -79,6 +85,20 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
+  appBar: {
+    height: 64,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  backButton: {
+    margin: 12,
+  },
+  filterContainer: {
+    width: '100vw',
+    padding: 40,
+    overflowX: 'hidden',
+  },
 }))
 
 export function TopBar() {
@@ -106,6 +126,10 @@ export function TopBar() {
     },
     []
   )
+
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  const handleDrawerOpen = useCallback(() => setDrawerOpen(true), [])
+  const handleDrawerClose = useCallback(() => setDrawerOpen(false), [])
 
   return (
     <div className={classes.container}>
@@ -141,11 +165,28 @@ export function TopBar() {
             color="primary"
             className={classes.iconButton}
             aria-label="กรอกผล"
+            onClick={handleDrawerOpen}
           >
             <FilterList />
           </IconButton>
         </div>
       </Paper>
+      <Hidden mdUp>
+        <Drawer anchor="right" open={drawerOpen} onClose={handleDrawerClose}>
+          <AppBar position="static" className={classes.appBar}>
+            <IconButton
+              className={classes.backButton}
+              onClick={handleDrawerClose}
+            >
+              <MdArrowBack color="white" />
+            </IconButton>
+            <Typography variant="h5">กรอกผล</Typography>
+          </AppBar>
+          <div className={classes.filterContainer}>
+            <FilterPanel />
+          </div>
+        </Drawer>
+      </Hidden>
     </div>
   )
 }
