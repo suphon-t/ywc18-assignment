@@ -47,6 +47,7 @@ const apiUrl = process.env.REACT_APP_API_URL as string
 export function useSearchData(suspense: boolean = true) {
   const { data, ...rest } = useSWR<SearchData>(`${apiUrl}/ywc18.json`, {
     suspense,
+    revalidateOnMount: false,
   })
   const categoryMap = useMemo(() => {
     if (!data) return null
