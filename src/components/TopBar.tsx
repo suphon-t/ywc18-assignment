@@ -147,7 +147,7 @@ export function TopBar() {
         onSubmit={handleSubmit}
       >
         <Hidden smDown>
-          <Fallback>
+          <Fallback silent>
             <ProvinceSelect />
           </Fallback>
         </Hidden>
