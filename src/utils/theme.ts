@@ -1,4 +1,4 @@
-import { createMuiTheme } from '@material-ui/core'
+import { createMuiTheme, ThemeOptions } from '@material-ui/core'
 
 declare module '@material-ui/core/styles/createPalette' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -7,11 +7,11 @@ declare module '@material-ui/core/styles/createPalette' {
   }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface PaletteOptions {
-    accent: PaletteOptions['primary']
+    accent?: PaletteOptions['primary']
   }
 }
 
-const baseTheme = {
+const baseTheme: ThemeOptions = {
   breakpoints: {
     values: {
       xs: 0,
@@ -43,7 +43,7 @@ const baseTheme = {
   },
 }
 
-export const lightTheme = createMuiTheme({
+export const lightThemeOptions: ThemeOptions = {
   ...baseTheme,
   palette: {
     ...baseTheme.palette,
@@ -60,9 +60,11 @@ export const lightTheme = createMuiTheme({
       secondary: '#999999',
     },
   },
-})
+}
 
-export const darkTheme = createMuiTheme({
+export const lightTheme = createMuiTheme(lightThemeOptions)
+
+export const darkThemeOptions: ThemeOptions = {
   ...baseTheme,
   palette: {
     ...baseTheme.palette,
@@ -71,4 +73,6 @@ export const darkTheme = createMuiTheme({
       main: '#90caf9',
     },
   },
-})
+}
+
+export const darkTheme = createMuiTheme(darkThemeOptions)

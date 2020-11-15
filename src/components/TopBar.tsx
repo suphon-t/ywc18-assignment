@@ -15,6 +15,7 @@ import {
   makeStyles,
   Paper,
   Theme,
+  ThemeProvider,
   Typography,
   useMediaQuery,
 } from '@material-ui/core'
@@ -26,6 +27,7 @@ import FilterList from '@material-ui/icons/FilterList'
 import { useQueryState } from '../utils'
 import { FilterPanel } from './FilterPanel'
 import { MdArrowBack } from 'react-icons/md'
+import { lightTheme } from '../utils/theme'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -173,15 +175,18 @@ export function TopBar() {
       </Paper>
       <Hidden mdUp>
         <Drawer anchor="right" open={drawerOpen} onClose={handleDrawerClose}>
-          <AppBar position="static" className={classes.appBar}>
-            <IconButton
-              className={classes.backButton}
-              onClick={handleDrawerClose}
-            >
-              <MdArrowBack color="white" />
-            </IconButton>
-            <Typography variant="h5">กรอกผล</Typography>
-          </AppBar>
+          <ThemeProvider theme={lightTheme}>
+            <AppBar position="static" className={classes.appBar}>
+              <IconButton
+                color="inherit"
+                className={classes.backButton}
+                onClick={handleDrawerClose}
+              >
+                <MdArrowBack />
+              </IconButton>
+              <Typography variant="h5">กรอกผล</Typography>
+            </AppBar>
+          </ThemeProvider>
           <div className={classes.filterContainer}>
             <FilterPanel />
           </div>
