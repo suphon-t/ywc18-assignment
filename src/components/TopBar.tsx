@@ -3,6 +3,7 @@ import React, {
   FormEventHandler,
   useCallback,
   useEffect,
+  useMemo,
   useState,
 } from 'react'
 import {
@@ -30,6 +31,8 @@ import { MdArrowBack } from 'react-icons/md'
 import { lightTheme } from '../utils/theme'
 import { Fallback } from './Fallback'
 import { ProvinceSelect } from './ProvinceSelect'
+import { Autocomplete } from '@material-ui/lab'
+import { useSearchData } from '../utils/searchData'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -135,6 +138,37 @@ export function TopBar() {
   const handleDrawerOpen = useCallback(() => setDrawerOpen(true), [])
   const handleDrawerClose = useCallback(() => setDrawerOpen(false), [])
 
+  const { data } = useSearchData(false)
+  const categories = data?.categories
+
+  const [category, setCategory] = useQueryState('category', '')
+  const handleCategoryChange = useCallback(
+    (_, value) => {
+      setCategory(value)
+    },
+    [setCategory]
+  )
+
+  const options = useMemo(
+    () => [
+      '',
+      ...(categories?.map((category) => category.name) ||
+        (category ? [category] : [])),
+    ],
+    [categories, category]
+  )
+
+  const filterOptions = useCallback(
+    (options: string[]) => options.filter((option) => option !== ''),
+    []
+  )
+
+  const renderOption = useCallback(
+    (option: string) =>
+      option === '' ? null : <span style={{ width: '100%' }}>{option}</span>,
+    []
+  )
+
   return (
     <div className={classes.container}>
       <div className={classes.logoContainer}>
@@ -151,15 +185,28 @@ export function TopBar() {
             <ProvinceSelect />
           </Fallback>
         </Hidden>
-        <InputBase
+        <Autocomplete
           className={classes.input}
-          value={query}
-          onChange={handleChange}
-          placeholder={
-            matches
-              ? 'ค้นหา ชื่อ ร้านอาหาร และเครื่องดื่ม ร้านธงฟ้า ร้านค้า OTOP และสินค้าทั่วไป'
-              : 'ค้นหา ชื่อ ร้านอาหาร...'
-          }
+          options={options}
+          value={category}
+          onChange={handleCategoryChange}
+          filterOptions={filterOptions}
+          renderOption={renderOption}
+          renderInput={(params) => (
+            <div ref={params.InputProps.ref}>
+              <InputBase
+                {...params.inputProps}
+                fullWidth
+                value={query}
+                onChange={handleChange}
+                placeholder={
+                  matches
+                    ? 'ค้นหา ชื่อ ร้านอาหาร และเครื่องดื่ม ร้านธงฟ้า ร้านค้า OTOP และสินค้าทั่วไป'
+                    : 'ค้นหา ชื่อ ร้านอาหาร...'
+                }
+              />
+            </div>
+          )}
         />
         <IconButton
           type="submit"
