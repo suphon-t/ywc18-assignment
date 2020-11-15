@@ -1,7 +1,8 @@
 import { makeStyles } from '@material-ui/core'
 import React, { ReactNode } from 'react'
-import { FaCarSide } from 'react-icons/fa'
 import { CgNotes } from 'react-icons/cg'
+import { FaCarSide } from 'react-icons/fa'
+import { MdPets } from 'react-icons/md'
 
 interface FacilityIconProps {
   name: string
@@ -10,6 +11,7 @@ interface FacilityIconProps {
 const iconMap: Record<string, ReactNode> = {
   ที่จอดรถ: <FaCarSide />,
   รับจองล่วงหน้า: <CgNotes />,
+  สามารถนำสัตว์เลี้ยงเข้าได้: <MdPets />,
 }
 
 const useStyles = makeStyles((theme) => ({
