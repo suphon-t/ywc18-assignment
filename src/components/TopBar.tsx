@@ -28,6 +28,7 @@ import { useQueryState } from '../utils'
 import { FilterPanel } from './FilterPanel'
 import { MdArrowBack } from 'react-icons/md'
 import { lightTheme } from '../utils/theme'
+import { Fallback } from './Fallback'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -188,7 +189,9 @@ export function TopBar() {
             </AppBar>
           </ThemeProvider>
           <div className={classes.filterContainer}>
-            <FilterPanel />
+            <Fallback>
+              <FilterPanel />
+            </Fallback>
           </div>
         </Drawer>
       </Hidden>
