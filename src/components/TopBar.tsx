@@ -8,13 +8,11 @@ import React, {
 } from 'react'
 import {
   AppBar,
-  Divider,
   Drawer,
   Hidden,
   IconButton,
   InputBase,
   makeStyles,
-  Paper,
   Theme,
   ThemeProvider,
   Typography,
@@ -24,10 +22,10 @@ import {
 import logo from '../assets/halfhalf-logo.png'
 import logoMini from '../assets/halfhalf-logo-mini.png'
 import Search from '@material-ui/icons/Search'
-import FilterList from '@material-ui/icons/FilterList'
 import { useQueryState } from '../utils'
 import { FilterPanel } from './FilterPanel'
 import { MdArrowBack } from 'react-icons/md'
+import { BsFunnel } from 'react-icons/bs'
 import { lightTheme } from '../utils/theme'
 import { Fallback } from './Fallback'
 import { ProvinceSelect } from './ProvinceSelect'
@@ -70,6 +68,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     flex: 1,
     marginRight: 16,
+    backgroundColor: theme.palette.background.paper,
+    border: `1px solid ${theme.palette.divider}`,
+    borderRadius: 8,
     [theme.breakpoints.up('md')]: {
       marginRight: 32,
     },
@@ -85,12 +86,22 @@ const useStyles = makeStyles((theme) => ({
     height: 28,
     margin: 4,
   },
+  searchIcon: {
+    color: theme.palette.text.primary,
+    fontSize: 18,
+  },
   filterButton: {
     display: 'flex',
     alignItems: 'center',
+    marginLeft: -10,
+    marginRight: 6,
     [theme.breakpoints.up('md')]: {
       display: 'none',
     },
+  },
+  filterIcon: {
+    color: theme.palette.accent.main,
+    fontSize: 20,
   },
   appBar: {
     height: 64,
@@ -175,11 +186,7 @@ export function TopBar() {
         <img className={classes.logo} src={logo} alt="คนละครึ่ง" />
         <img className={classes.logoMini} src={logoMini} alt="คนละครึ่ง" />
       </div>
-      <Paper
-        component="form"
-        className={classes.searchBar}
-        onSubmit={handleSubmit}
-      >
+      <form className={classes.searchBar} onSubmit={handleSubmit}>
         <Hidden smDown>
           <Fallback silent>
             <ProvinceSelect />
@@ -213,20 +220,19 @@ export function TopBar() {
           className={classes.iconButton}
           aria-label="ค้นหา"
         >
-          <Search />
+          <Search className={classes.searchIcon} />
         </IconButton>
-        <div className={classes.filterButton}>
-          <Divider orientation="vertical" className={classes.divider} />
-          <IconButton
-            color="primary"
-            className={classes.iconButton}
-            aria-label="กรอกผล"
-            onClick={handleDrawerOpen}
-          >
-            <FilterList />
-          </IconButton>
-        </div>
-      </Paper>
+      </form>
+      <div className={classes.filterButton}>
+        <IconButton
+          color="primary"
+          className={classes.iconButton}
+          aria-label="กรอกผล"
+          onClick={handleDrawerOpen}
+        >
+          <BsFunnel className={classes.filterIcon} />
+        </IconButton>
+      </div>
       <Hidden mdUp>
         <Drawer anchor="right" open={drawerOpen} onClose={handleDrawerClose}>
           <ThemeProvider theme={lightTheme}>
