@@ -13,10 +13,8 @@ import {
   IconButton,
   InputBase,
   makeStyles,
-  Theme,
   ThemeProvider,
   Typography,
-  useMediaQuery,
 } from '@material-ui/core'
 
 import logo from '../assets/halfhalf-logo.png'
@@ -78,6 +76,11 @@ const useStyles = makeStyles((theme) => ({
   input: {
     marginLeft: 10,
     flex: 1,
+    '@global': {
+      'input:placeholder-shown': {
+        textOverflow: 'ellipsis',
+      },
+    },
   },
   iconButton: {
     padding: 10,
@@ -121,7 +124,6 @@ const useStyles = makeStyles((theme) => ({
 
 export function TopBar() {
   const classes = useStyles()
-  const matches = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'))
 
   const [searchQuery, setSearchQuery] = useQueryState('searchQuery', '')
   const [query, setQuery] = useState('')
@@ -207,9 +209,7 @@ export function TopBar() {
                 value={query}
                 onChange={handleChange}
                 placeholder={
-                  matches
-                    ? 'ค้นหา ชื่อ ร้านอาหาร และเครื่องดื่ม ร้านธงฟ้า ร้านค้า OTOP และสินค้าทั่วไป'
-                    : 'ค้นหา ชื่อ ร้านอาหาร...'
+                  'ค้นหา ชื่อ ร้านอาหาร และเครื่องดื่ม ร้านธงฟ้า ร้านค้า OTOP และสินค้าทั่วไป'
                 }
               />
             </div>
