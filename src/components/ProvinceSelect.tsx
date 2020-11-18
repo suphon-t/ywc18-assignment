@@ -17,9 +17,6 @@ const useStyles = makeStyles({
         border: 'none',
         borderRadius: 0,
       },
-      '> div > div:focus': {
-        backgroundColor: 'transparent',
-      },
     },
     width: 192,
   },

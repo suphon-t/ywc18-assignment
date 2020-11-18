@@ -57,6 +57,25 @@ const baseTheme: ThemeOptions = {
       '"Segoe UI Symbol"',
     ].join(','),
   },
+  overrides: {
+    MuiOutlinedInput: {
+      notchedOutline: {
+        borderRadius: '2px',
+        transition: 'border .3s linear',
+      },
+      inputMarginDense: {
+        paddingTop: 6.5,
+        paddingBottom: 6.5,
+      },
+    },
+    MuiSelect: {
+      select: {
+        '&:focus': {
+          backgroundColor: 'transparent',
+        },
+      },
+    },
+  },
 }
 
 export const lightThemeOptions: ThemeOptions = {
@@ -71,6 +90,26 @@ export const lightThemeOptions: ThemeOptions = {
     },
     text: {
       secondary: '#999999',
+    },
+  },
+  overrides: {
+    ...baseTheme.overrides,
+    MuiRadio: {
+      root: {
+        color: 'rgba(0, 0, 0, 0.12)',
+      },
+    },
+    MuiOutlinedInput: {
+      ...baseTheme.overrides?.MuiOutlinedInput,
+      root: {
+        '&:hover $notchedOutline': {
+          borderColor: '#1890ff',
+        },
+      },
+      notchedOutline: {
+        ...baseTheme.overrides?.MuiOutlinedInput?.notchedOutline,
+        borderColor: 'rgba(0, 0, 0, 0.12)',
+      },
     },
   },
 }
