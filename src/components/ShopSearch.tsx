@@ -38,6 +38,12 @@ const useStyles = makeStyles((theme) => ({
       padding: '12px 32px',
     },
   },
+  breadcrumbsItem: {
+    fontSize: 14,
+  },
+  breadcrumbsActive: {
+    fontWeight: 600,
+  },
   header: {
     padding: 24,
     paddingLeft: 16,
@@ -80,8 +86,15 @@ export function ShopSearch() {
       <ThemeProvider theme={darkTheme}>
         <div className={classes.breadcrumbsContainer}>
           <Breadcrumbs className={classes.breadcrumbs}>
-            <Typography color="inherit">หน้าแรก</Typography>
-            <Typography color="textPrimary">ค้นหา</Typography>
+            <Typography color="textPrimary" className={classes.breadcrumbsItem}>
+              หน้าแรก
+            </Typography>
+            <Typography
+              color="textPrimary"
+              className={`${classes.breadcrumbsItem} ${classes.breadcrumbsActive}`}
+            >
+              ค้นหา
+            </Typography>
           </Breadcrumbs>
         </div>
       </ThemeProvider>
