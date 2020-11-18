@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
   header: {
     color: theme.palette.text.primary,
     fontWeight: 600,
+    marginTop: 2,
   },
   radioGroup: {
     marginTop: 16,

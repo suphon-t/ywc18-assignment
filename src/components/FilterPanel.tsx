@@ -7,10 +7,6 @@ import { CustomRadio } from './CustomRadio'
 import { AllPlacesIcon } from './AllPlacesIcon'
 
 const useStyles = makeStyles((theme) => ({
-  header: {
-    color: theme.palette.text.primary,
-    fontWeight: 600,
-  },
   header2: {
     color: theme.palette.text.primary,
     fontWeight: 600,

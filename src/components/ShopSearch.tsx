@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.accent.main,
   },
   breadcrumbs: {
+    height: 47,
     maxWidth: 1280,
     margin: '0 auto',
     padding: '12px 16px',
@@ -45,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
   },
   header: {
+    paddingTop: 18,
     padding: 24,
     paddingLeft: 16,
     fontWeight: 600,
@@ -57,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   filterContainer: {
-    width: 350,
+    width: 352,
     marginRight: 32,
     borderColor: theme.palette.type === 'light' ? '#a0aec0' : undefined,
     borderRadius: 2,
