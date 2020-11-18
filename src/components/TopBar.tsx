@@ -22,7 +22,8 @@ import logoMini from '../assets/halfhalf-logo-mini.png'
 import Search from '@material-ui/icons/Search'
 import { useQueryState } from '../utils'
 import { FilterPanel } from './FilterPanel'
-import { MdArrowBack } from 'react-icons/md'
+import { MdArrowBack, MdCardTravel } from 'react-icons/md'
+import { GiMeal } from 'react-icons/gi'
 import { BsFunnel } from 'react-icons/bs'
 import { lightTheme } from '../utils/theme'
 import { Fallback } from './Fallback'
@@ -120,6 +121,10 @@ const useStyles = makeStyles((theme) => ({
     padding: 40,
     overflowX: 'hidden',
   },
+  categoryIcon: {
+    marginRight: 8,
+    transform: 'translateY(4px)',
+  },
 }))
 
 export function TopBar() {
@@ -178,8 +183,17 @@ export function TopBar() {
 
   const renderOption = useCallback(
     (option: string) =>
-      option === '' ? null : <span style={{ width: '100%' }}>{option}</span>,
-    []
+      option === '' ? null : (
+        <span style={{ width: '100%' }}>
+          {option === 'ร้านธงฟ้า' ? (
+            <MdCardTravel className={classes.categoryIcon} />
+          ) : (
+            <GiMeal className={classes.categoryIcon} />
+          )}{' '}
+          {option}
+        </span>
+      ),
+    [classes.categoryIcon]
   )
 
   return (
