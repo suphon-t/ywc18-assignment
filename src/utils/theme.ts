@@ -48,7 +48,7 @@ export const lightThemeOptions: ThemeOptions = {
   palette: {
     ...baseTheme.palette,
     primary: {
-      main: '#283A7C',
+      main: '#1890ff',
     },
     success: {
       main: '#1BC300',
