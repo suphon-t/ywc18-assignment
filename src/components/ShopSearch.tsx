@@ -16,6 +16,15 @@ import { SearchResults } from './SearchResults'
 import { Fallback } from './Fallback'
 import { FilterPanel } from './FilterPanel'
 import { QueryOptions, useSearchData } from '../utils/searchData'
+import resultBg from '../assets/result-bg.png'
+
+const withBackgroundImage = {
+  minHeight: '100vh',
+  backgroundImage: `url(${resultBg})`,
+  backgroundPosition: 'center',
+  backgroundSize: 'cover',
+  backgroundAttachment: 'fixed',
+}
 
 const useStyles = makeStyles((theme) => ({
   breadcrumbsContainer: {
@@ -47,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
     borderColor: theme.palette.type === 'light' ? '#a0aec0' : undefined,
     borderRadius: 2,
   },
+  main: theme.palette.type === 'light' ? withBackgroundImage : {},
 }))
 
 export function ShopSearch() {
@@ -65,7 +75,7 @@ export function ShopSearch() {
     ', ราคา ' + priceRange[parseInt(options.price) - 1]
 
   return (
-    <div>
+    <div className={classes.main}>
       <TopBar />
       <ThemeProvider theme={darkTheme}>
         <div className={classes.breadcrumbsContainer}>

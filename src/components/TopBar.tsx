@@ -33,10 +33,12 @@ import { Autocomplete } from '@material-ui/lab'
 import { useSearchData } from '../utils/searchData'
 
 const useStyles = makeStyles((theme) => ({
+  topBarBg: {
+    backgroundColor: theme.palette.background.default,
+  },
   container: {
     maxWidth: 1280,
     margin: '0 auto',
-    backgroundColor: theme.palette.background.default,
     display: 'flex',
     alignItems: 'center',
   },
@@ -218,75 +220,77 @@ export function TopBar() {
   )
 
   return (
-    <div className={classes.container}>
-      <div className={classes.logoContainer}>
-        <img className={classes.logo} src={logo} alt="คนละครึ่ง" />
-        <img className={classes.logoMini} src={logoMini} alt="คนละครึ่ง" />
-      </div>
-      <form className={classes.searchBar} onSubmit={handleSubmit}>
-        <Hidden smDown>
-          <Fallback silent>
-            <ProvinceSelect />
-          </Fallback>
-        </Hidden>
-        <Autocomplete
-          className={classes.input}
-          options={options}
-          value={category}
-          onChange={handleCategoryChange}
-          filterOptions={filterOptions}
-          renderOption={renderOption}
-          renderInput={(params) => (
-            <div ref={params.InputProps.ref}>
-              <InputBase
-                {...params.inputProps}
-                fullWidth
-                value={query}
-                onChange={handleChange}
-                placeholder={
-                  'ค้นหา ชื่อ ร้านอาหาร และเครื่องดื่ม ร้านธงฟ้า ร้านค้า OTOP และสินค้าทั่วไป'
-                }
-              />
-            </div>
-          )}
-        />
-        <Button type="submit" className={classes.searchButton}>
-          <Search className={classes.searchIcon} />
-        </Button>
-      </form>
-      <div className={classes.filterButton}>
-        <IconButton
-          color="secondary"
-          className={classes.iconButton}
-          aria-label="กรอกผล"
-          onClick={handleDrawerOpen}
-        >
-          <BsFunnel className={classes.filterIcon} />
-        </IconButton>
-      </div>
-      <Hidden mdUp>
-        <Drawer anchor="right" open={drawerOpen} onClose={handleDrawerClose}>
-          <ThemeProvider theme={lightTheme}>
-            <AppBar position="static" className={classes.appBar}>
-              <IconButton
-                color="inherit"
-                className={classes.backButton}
-                onClick={handleDrawerClose}
-              >
-                <MdArrowBack />
-              </IconButton>
-              <Typography variant="h5" className={classes.filterTitle}>
-                กรอกผล
-              </Typography>
-            </AppBar>
-          </ThemeProvider>
-          <div className={classes.filterContainer}>
-            <Fallback>
-              <FilterPanel />
+    <div className={classes.topBarBg}>
+      <div className={classes.container}>
+        <div className={classes.logoContainer}>
+          <img className={classes.logo} src={logo} alt="คนละครึ่ง" />
+          <img className={classes.logoMini} src={logoMini} alt="คนละครึ่ง" />
+        </div>
+        <form className={classes.searchBar} onSubmit={handleSubmit}>
+          <Hidden smDown>
+            <Fallback silent>
+              <ProvinceSelect />
             </Fallback>
-          </div>
-        </Drawer>
-      </Hidden>
+          </Hidden>
+          <Autocomplete
+            className={classes.input}
+            options={options}
+            value={category}
+            onChange={handleCategoryChange}
+            filterOptions={filterOptions}
+            renderOption={renderOption}
+            renderInput={(params) => (
+              <div ref={params.InputProps.ref}>
+                <InputBase
+                  {...params.inputProps}
+                  fullWidth
+                  value={query}
+                  onChange={handleChange}
+                  placeholder={
+                    'ค้นหา ชื่อ ร้านอาหาร และเครื่องดื่ม ร้านธงฟ้า ร้านค้า OTOP และสินค้าทั่วไป'
+                  }
+                />
+              </div>
+            )}
+          />
+          <Button type="submit" className={classes.searchButton}>
+            <Search className={classes.searchIcon} />
+          </Button>
+        </form>
+        <div className={classes.filterButton}>
+          <IconButton
+            color="secondary"
+            className={classes.iconButton}
+            aria-label="กรอกผล"
+            onClick={handleDrawerOpen}
+          >
+            <BsFunnel className={classes.filterIcon} />
+          </IconButton>
+        </div>
+        <Hidden mdUp>
+          <Drawer anchor="right" open={drawerOpen} onClose={handleDrawerClose}>
+            <ThemeProvider theme={lightTheme}>
+              <AppBar position="static" className={classes.appBar}>
+                <IconButton
+                  color="inherit"
+                  className={classes.backButton}
+                  onClick={handleDrawerClose}
+                >
+                  <MdArrowBack />
+                </IconButton>
+                <Typography variant="h5" className={classes.filterTitle}>
+                  กรอกผล
+                </Typography>
+              </AppBar>
+            </ThemeProvider>
+            <div className={classes.filterContainer}>
+              <Fallback>
+                <FilterPanel />
+              </Fallback>
+            </div>
+          </Drawer>
+        </Hidden>
+      </div>
     </div>
   )
 }
