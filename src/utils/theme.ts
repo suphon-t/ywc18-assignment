@@ -1,5 +1,14 @@
 import { createMuiTheme, ThemeOptions } from '@material-ui/core'
 
+declare module '@material-ui/core/styles/createMuiTheme' {
+  interface Theme {
+    searchButtonBackground: string
+  }
+  interface ThemeOptions {
+    searchButtonBackground: string
+  }
+}
+
 declare module '@material-ui/core/styles/createPalette' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface Palette {
@@ -26,6 +35,7 @@ const baseTheme: ThemeOptions = {
       main: '#283A7C',
     },
   },
+  searchButtonBackground: '#f8f8f8',
   typography: {
     fontFamily: [
       'IBM Plex Sans Thai',
@@ -73,6 +83,7 @@ export const darkThemeOptions: ThemeOptions = {
       main: '#90caf9',
     },
   },
+  searchButtonBackground: 'rgba(255, 255, 255, 0.08)',
 }
 
 export const darkTheme = createMuiTheme(darkThemeOptions)

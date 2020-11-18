@@ -8,6 +8,7 @@ import React, {
 } from 'react'
 import {
   AppBar,
+  Button,
   Drawer,
   Hidden,
   IconButton,
@@ -93,6 +94,16 @@ const useStyles = makeStyles((theme) => ({
   searchIcon: {
     color: theme.palette.text.primary,
     fontSize: 18,
+  },
+  searchButton: {
+    height: '100%',
+    backgroundColor: theme.searchButtonBackground,
+    paddingLeft: 12,
+    paddingRight: 12,
+    marginRight: -4,
+    borderRadius: 0,
+    borderTopRightRadius: 7,
+    borderBottomRightRadius: 7,
   },
   filterButton: {
     display: 'flex',
@@ -229,13 +240,9 @@ export function TopBar() {
             </div>
           )}
         />
-        <IconButton
-          type="submit"
-          className={classes.iconButton}
-          aria-label="ค้นหา"
-        >
+        <Button type="submit" className={classes.searchButton}>
           <Search className={classes.searchIcon} />
-        </IconButton>
+        </Button>
       </form>
       <div className={classes.filterButton}>
         <IconButton
