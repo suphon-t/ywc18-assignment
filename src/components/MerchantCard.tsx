@@ -21,11 +21,14 @@ interface MerchantCardProps {
 const useStyles = makeStyles<Theme, MerchantCardProps>((theme) => ({
   container: {
     marginBottom: theme.spacing(1),
+    borderRadius: 0,
+    borderColor: theme.palette.type === 'light' ? '#C9E1E9' : undefined,
   },
   media: {
     minHeight: 224,
     [theme.breakpoints.up('lg')]: {
       width: 240,
+      margin: 5,
     },
   },
   content: {

@@ -44,6 +44,8 @@ const useStyles = makeStyles((theme) => ({
   filterContainer: {
     width: 350,
     marginRight: 32,
+    borderColor: theme.palette.type === 'light' ? '#a0aec0' : undefined,
+    borderRadius: 2,
   },
 }))
 
