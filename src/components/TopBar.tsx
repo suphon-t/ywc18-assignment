@@ -81,6 +81,9 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 10,
     flex: 1,
     '@global': {
+      input: {
+        fontSize: 14,
+      },
       'input:placeholder-shown': {
         textOverflow: 'ellipsis',
       },

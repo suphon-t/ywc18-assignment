@@ -13,6 +13,7 @@ import { useSearchData } from '../utils/searchData'
 const useStyles = makeStyles({
   textField: {
     '@global': {
+      div: { fontSize: 14 },
       '> div > fieldset': {
         border: 'none',
         borderRadius: 0,
