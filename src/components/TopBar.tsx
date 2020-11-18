@@ -119,10 +119,21 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 20,
   },
   appBar: {
+    position: 'relative',
     height: 64,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: '#2a4365',
+    boxShadow: 'none',
+  },
+  filterTitle: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    fontWeight: 500,
+    textAlign: 'center',
+    pointerEvents: 'none',
   },
   backButton: {
     margin: 12,
@@ -265,7 +276,9 @@ export function TopBar() {
               >
                 <MdArrowBack />
               </IconButton>
-              <Typography variant="h5">กรอกผล</Typography>
+              <Typography variant="h5" className={classes.filterTitle}>
+                กรอกผล
+              </Typography>
             </AppBar>
           </ThemeProvider>
           <div className={classes.filterContainer}>
