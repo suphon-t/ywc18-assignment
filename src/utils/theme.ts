@@ -31,6 +31,12 @@ const baseTheme: ThemeOptions = {
     },
   },
   palette: {
+    primary: {
+      main: '#1890ff',
+    },
+    secondary: {
+      main: '#283A7C',
+    },
     accent: {
       main: '#283A7C',
     },
@@ -57,9 +63,6 @@ export const lightThemeOptions: ThemeOptions = {
   ...baseTheme,
   palette: {
     ...baseTheme.palette,
-    primary: {
-      main: '#1890ff',
-    },
     success: {
       main: '#1BC300',
     },
@@ -80,6 +83,9 @@ export const darkThemeOptions: ThemeOptions = {
     ...baseTheme.palette,
     type: 'dark',
     primary: {
+      main: '#90caf9',
+    },
+    secondary: {
       main: '#90caf9',
     },
   },

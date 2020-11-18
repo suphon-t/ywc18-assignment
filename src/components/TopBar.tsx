@@ -115,7 +115,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   filterIcon: {
-    color: theme.palette.accent.main,
     fontSize: 20,
   },
   appBar: {
@@ -257,7 +256,7 @@ export function TopBar() {
       </form>
       <div className={classes.filterButton}>
         <IconButton
-          color="primary"
+          color="secondary"
           className={classes.iconButton}
           aria-label="กรอกผล"
           onClick={handleDrawerOpen}
