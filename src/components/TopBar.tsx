@@ -257,7 +257,7 @@ export function TopBar() {
             )}
           />
           <Button type="submit" className={classes.searchButton}>
-            <Search className={classes.searchIcon} />
+            <Search className={classes.searchIcon} titleAccess="ค้นหา" />
           </Button>
         </form>
         <div className={classes.filterButton}>
@@ -267,7 +267,7 @@ export function TopBar() {
             aria-label="กรอกผล"
             onClick={handleDrawerOpen}
           >
-            <BsFunnel className={classes.filterIcon} />
+            <BsFunnel className={classes.filterIcon} title="กรอกผล" />
           </IconButton>
         </div>
         <Hidden mdUp>
