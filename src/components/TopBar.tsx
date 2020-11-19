@@ -82,7 +82,9 @@ const useStyles = makeStyles((theme) => ({
     flex: 1,
     '@global': {
       input: {
-        fontSize: 14,
+        [theme.breakpoints.up('md')]: {
+          fontSize: 14,
+        },
       },
       'input:placeholder-shown': {
         textOverflow: 'ellipsis',
@@ -101,7 +103,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 18,
   },
   searchButton: {
-    height: '100%',
+    height: 38,
     backgroundColor: theme.searchButtonBackground,
     paddingLeft: 12,
     paddingRight: 12,
@@ -252,13 +254,18 @@ export function TopBar() {
                   placeholder={
                     'ค้นหา ชื่อ ร้านอาหาร และเครื่องดื่ม ร้านธงฟ้า ร้านค้า OTOP และสินค้าทั่วไป'
                   }
+                  endAdornment={
+                    <Button type="submit" className={classes.searchButton}>
+                      <Search
+                        className={classes.searchIcon}
+                        titleAccess="ค้นหา"
+                      />
+                    </Button>
+                  }
                 />
               </div>
             )}
           />
-          <Button type="submit" className={classes.searchButton}>
-            <Search className={classes.searchIcon} titleAccess="ค้นหา" />
-          </Button>
         </form>
         <div className={classes.filterButton}>
           <IconButton
