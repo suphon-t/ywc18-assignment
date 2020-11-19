@@ -29,12 +29,28 @@ const useStyles = makeStyles((theme) => ({
     borderStyle: 'solid',
     borderRadius: '100%',
   },
+  imageIcon: {
+    width: 18,
+    height: 18,
+  },
 }))
+
+const konLaKreungSite = 'https://search-merchant.xn--42caj4e6bk1f5b1j.com'
 
 export function FacilityIcon({ name }: FacilityIconProps) {
   const classes = useStyles()
   const Icon = iconMap[name]
   return (
-    <div className={classes.icon}>{Icon ? <Icon title={name} /> : null}</div>
+    <div className={classes.icon}>
+      {Icon ? (
+        <Icon title={name} />
+      ) : (
+        <img
+          className={classes.imageIcon}
+          src={`${konLaKreungSite}/images/facilities/${name}.png`}
+          alt={name}
+        />
+      )}
+    </div>
   )
 }
