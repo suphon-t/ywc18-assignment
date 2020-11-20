@@ -107,6 +107,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.searchButtonBackground,
     paddingLeft: 12,
     paddingRight: 12,
+    marginLeft: 4,
     marginRight: -4,
     borderRadius: 0,
     borderTopRightRadius: 7,
